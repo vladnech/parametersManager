@@ -1,0 +1,51 @@
+<html>
+	<head>
+        <title>Parameters</title>
+        
+  	    <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/bootstrap-theme.css"/>
+        <link rel="stylesheet" href="css/site.css" />
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+
+        <script src="scripts/bootstrap.min.js"></script>	
+
+        <!-- project scritps -->
+        <script src="scripts/project/cgrid.js"></script>	
+        <script src="scripts/project/parametersManager.js"></script>	
+	</head>
+	<body>
+        <div class="main-pallete">
+            <div class="main-zone container">
+                <div id="parametersGrid">
+                    <!-- <div class="c-grid-toolbar">
+                        <a href="#" id="addParameter"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new parameter</a>
+                        <a href="#" id="addValue"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new value</a>
+                    </div>
+                        
+                    <table class="c-grid">
+                        <tr class="c-grid-columns">
+                            <th>Parameter/Value</th>
+                            <th><span class="enter-value">[Change title]</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="enter-value">[Change name]</span></td>
+                            <td><span class="enter-value">[Enter value]</span></td>
+                        </tr>
+                    </table> -->
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function() {
+                var params = new parametersManager();
+            });
+        </script>
+
+	</body>
+</html>

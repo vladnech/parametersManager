@@ -1,0 +1,134 @@
+.main-pallete 
+{
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	margin-top: 50px;
+}
+
+.main-zone { width: 980px; position: static; top: 0px;}
+
+.c-grid {
+	width: 100%;
+    margin: 0;
+    max-width: none;
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: show;
+	outline: 0;
+    border-style: solid;
+    border-width: 1 0 1 1px;
+	border-color: #e6e6e6;
+	font-size: 14px;
+}
+
+.c-grid-toolbar {
+	background-color: #3343a4;
+	cursor: pointer;	
+	border-width: 0px;
+	padding: .4em .6em;
+    overflow: hidden;
+    line-height: 1.6em;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+}
+
+.c-grid-toolbar a {
+	color: white;
+	display: inline-block;
+	user-select: none;
+	text-decoration: none;
+	margin: 0 .16em;
+	vertical-align: middle;
+    line-height: 1.1em;
+    padding: 5px 10px;	
+}
+
+.c-grid-toolbar a:hover {
+	box-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
+	background-color: #4756B0;
+}
+
+.c-grid th {
+    font-weight: 400;
+    white-space: nowrap;
+	text-align: left;	
+	background-color: #fafafa;
+	color: #a8a8a8;
+	border-color: #e6e6e6;
+}
+
+.c-grid td, .c-grid th {
+    border-style: solid;
+    border-width: 0 1 0 0px;
+    padding: .4em .6em;
+    overflow: hidden;
+    line-height: 1.6em;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+}
+
+.c-grid tr td {
+    border-top-width: 1px;
+	border-style: solid;
+	border-color: #e6e6e6;
+	border-left-width: 0;
+}
+
+.c-grid-textbox {
+	width: 100%;
+}
+
+span.enter-value {
+	font-style: italic;
+	cursor: pointer;
+}
+
+span.change-value:hover {
+	text-decoration: underline;
+	color: blue;
+}
+
+span.enter-value:hover {
+	text-decoration: underline;
+}
+
+/*.c-grid-row {
+	margin: 0px;
+}
+
+div.c-grid-header 
+{ 
+    overflow: hidden;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    padding: .5em .6em .4em .6em;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+	text-align: left;	
+	background-color: #fafafa;
+	color: #a8a8a8;
+	border-color: #e6e6e6;
+}
+
+.fixed {
+	background-color: #fafafa;
+}
+
+.c-grid-cell {
+	border-style: solid;
+    border-width: 0 0 1 1px;
+    padding: .4em .6em;
+    overflow: hidden;
+    line-height: 1.6em;
+    vertical-align: middle;
+	text-overflow: ellipsis;
+	border-color: #e6e6e6;
+}
+
+.button-fixed {
+	background-color: #3343a4;
+	color: white;
+	cursor: pointer;
+}*/

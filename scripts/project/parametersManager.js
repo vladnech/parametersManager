@@ -1,0 +1,108 @@
+parametersManager = function(options) {
+    this.init();
+};
+
+parametersManager.prototype = {
+    init: function() {
+        this.parametersGrid = $("#parametersGrid");
+        this.parametersGrid.cgrid();
+        //this.initToolbar();
+        //this.initGrid();
+    },
+
+    initToolbar: function() {
+        this.addParameter = $("#addParameter");
+        this.addValue = $("#addValue");
+
+        this.addParameter.off().on("click", { obj: this }, this.onAddParameterClick);
+        this.addValue.off().on("click", { obj: this }, this.onAddValueClick);
+    },
+
+    onAddParameterClick: function(e) {
+        var self = e.data.obj;
+        self.addRow();
+    },
+
+    addRow: function() {
+        var template = this.parametersGrid.find("tr:last").find("td");
+
+        var tr = $("<tr>");
+        $.each(template, function(index, item) {
+            var td = $("<td>");
+            td.html($(item).html());
+            tr.append(td);
+        });
+        this.parametersGrid.find("table").append(tr);
+        this._applyEvents();
+    },
+
+    addColumn: function() {
+        var template = this.parametersGrid.find("tr");
+        $.each(template, function(index, item) {
+            if ($(item).hasClass("c-grid-columns")) {
+                var th = $("<th>");
+                $(item).append(th);
+            }
+            else {
+                var td = $("<td>");
+                $(item).append(td);
+            }
+        });
+        this._applyEvents();
+    },
+
+    onAddValueClick: function(e) {
+        var self = e.data.obj;
+        self.addColumn();
+    },
+
+    onEnterValueClick: function(e) {
+        var self = e.data.obj;
+        var el = $(this);
+        var tr = el.parent();
+        el.hide();
+
+        var text = null;
+        if (el.hasClass("change-value"))
+            text = el.text();
+
+        var i = self.getTextBox(text);
+        tr.append(i);
+        i.focus();
+
+        i.focusout(function() {
+            var value = $(this).val();
+            console.log(value);
+            $(this).remove();
+
+            if (value) {
+                el.removeClass("enter-value").addClass("change-value");
+                el.text(value);
+            }
+            el.show();
+        });
+    },
+
+    getTextBox: function(value) {
+        var input = $("<input>");
+        input.attr("type", "text");
+        input.addClass("c-grid-textbox");
+        if (value)
+            input.attr("value", value);
+        return input;
+    },
+
+    initGrid: function() {
+        this._applyEvents();
+    },
+
+    _applyEvents: function() {
+        this.enterValue = $(".enter-value");
+        this.enterValue.off().on("click", { obj: this }, this.onEnterValueClick);
+    },
+    
+    getGridSource: function() {
+        var dataSource = {};
+        return dataSource;
+    }
+}; 
