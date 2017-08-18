@@ -5,7 +5,7 @@ parametersManager = function(options) {
 parametersManager.prototype = {
     init: function() {
         this.parametersGrid = $("#parametersGrid");
-        this.parametersGrid.cgrid();
+        this.parametersGrid.customGrid();
         //this.initToolbar();
         //this.initGrid();
     },

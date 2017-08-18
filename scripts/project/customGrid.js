@@ -1,5 +1,5 @@
 //********************************************************************************
-// Custom Grid widget (CGrid)
+// Custom Grid widget (customGrid)
 // options: {
 //             _element: <reference to a DOM element>    
 //             toolbar: { 
@@ -11,12 +11,12 @@
 //          }
 //********************************************************************************
 
-cgrid = function(options) {
+customGrid = function(options) {
     $.extend(this, options);
     this.init();
 };
 
-cgrid.prototype = {
+customGrid.prototype = {
     init: function() {
         if (this._element) {
             this.DOM = {};
@@ -31,6 +31,7 @@ cgrid.prototype = {
         }
 
         this.DOM.table = $("<table>");
+        this.DOM.table.addClass("c-grid");
         this.initTable();
     },
 
@@ -74,6 +75,14 @@ cgrid.prototype = {
         tr.appendTo(this.DOM.table);
     },
 
+    addCell: function(tr, html) {
+        if (tr) {
+            var td = $("<td>");
+            if (html) td.html(html);
+            td.appendTo(tr);
+        }
+    },
+
     initTable: function() {
         this.addTitleRow();
         if (this.data) {
@@ -81,14 +90,68 @@ cgrid.prototype = {
         else {
             var tr = $("<tr>");
             if (this.defaultFirstColumnRow) {
-                
+                this.addCell(tr, this.defaultFirstColumnRow.html);
             }
-
+            if (this.defaultCell) {
+                this.addCell(tr, this.defaultCell.html);
+            }
+            tr.appendTo(this.DOM.table);
         }
+        this.DOM.table.appendTo(this._element);
+        this._afterInitTable();
+    },
+
+    getTextBox: function(value) {
+        var input = $("<input>");
+        input.attr("type", "text");
+        input.addClass("c-grid-textbox");
+        if (value)
+            input.attr("value", value);
+        return input;
+    },
+
+    _afterInitTable: function() {
+        if (this.afterInitTable) {
+            return this.afterInitTable(this);
+        }
+        return this._defaultInitTable();
+    },
+
+    _defaultInitTable: function() {
+        this.enterValue = $(".enter-value");
+        this.enterValue.off().on("click", { obj: this }, this._onEnterValueClick);
+        return true;
+    },
+
+    _onEnterValueClick: function(e) {
+        var self = e.data.obj;
+        var el = $(this);
+        var tr = el.parent();
+        el.hide();
+
+        var text = null;
+        if (el.hasClass("change-value"))
+            text = el.text();
+
+        var i = self.getTextBox(text);
+        tr.append(i);
+        i.focus();
+
+        i.focusout(function() {
+            var value = $(this).val();
+            console.log(value);
+            $(this).remove();
+
+            if (value) {
+                el.removeClass("enter-value").addClass("change-value");
+                el.text(value);
+            }
+            el.show();
+        });
     }
 };
 
-$.fn.cgrid = function(options) {
+$.fn.customGrid = function(options) {
     var defaultColumn = { html: "<span class='enter-value'>[Change title]</span>" };
     var defaultFirstColumnRow = { html: "<span class='enter-value'>[Change name]</span>" };
     var defaultCell = { html: "<span class='enter-value'>[Enter value]</span>" };
@@ -98,15 +161,14 @@ $.fn.cgrid = function(options) {
             buttons: [{ title: "Add row", id: "addRow", glyph: "glyphicon-plus" }, 
                       { title: "Add column", id: "addColumn", glyph: "glyphicon-plus" }]
         },
-        defaultColumn: defaultColumn,
         defaultFirstColumnRow: defaultFirstColumnRow,
         defaultCell: defaultCell,
-        columns: [{ title: "Column/Row" }, defaultColumn] }
+        columns: [{ title: "Column/Row" }, defaultColumn] 
     };
 
     options = $.extend(true, {}, defaults, options);
     this.each(function() {
         options._element = this;
-        return new cgrid(options);
+        return new customGrid(options);
     });
 };
