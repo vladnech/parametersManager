@@ -53,9 +53,9 @@ customGrid.prototype = {
                 span.appendTo(a);
             }
             a.html(a.html() + " " + item.title);
-            if (item.onclick)
-                a.off().on("click", item.onclick);
             self.DOM.toolbar.append(a);
+            if (item.onclick) 
+                a.off().on("click", { obj: item.context || self }, item.onclick);
         });
 
         this.DOM.toolbar.appendTo(this._element);
@@ -163,12 +163,11 @@ $.fn.customGrid = function(options) {
         },
         defaultFirstColumnRow: defaultFirstColumnRow,
         defaultCell: defaultCell,
+        defaultColumn: defaultColumn,
         columns: [{ title: "Column/Row" }, defaultColumn] 
     };
 
     options = $.extend(true, {}, defaults, options);
-    this.each(function() {
-        options._element = this;
-        return new customGrid(options);
-    });
+    options._element = this;
+    return new customGrid(options);
 };

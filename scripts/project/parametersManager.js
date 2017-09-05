@@ -5,7 +5,12 @@ parametersManager = function(options) {
 parametersManager.prototype = {
     init: function() {
         this.parametersGrid = $("#parametersGrid");
-        this.parametersGrid.customGrid();
+        this.grid = this.parametersGrid.customGrid({
+            toolbar: { 
+                buttons: [{ title: "Add parameter", id: "addRow", glyph: "glyphicon-plus", onclick: this.onAddParameterClick, context: this }, 
+                          { title: "Add value", id: "addColumn", glyph: "glyphicon-plus", onclick: this.onAddValueClick, context: this }]
+            }
+        });
         //this.initToolbar();
         //this.initGrid();
     },
@@ -37,14 +42,19 @@ parametersManager.prototype = {
     },
 
     addColumn: function() {
+        var self = this;
         var template = this.parametersGrid.find("tr");
         $.each(template, function(index, item) {
             if ($(item).hasClass("c-grid-columns")) {
                 var th = $("<th>");
-                $(item).append(th);
+                if (self && self.grid)
+                    th.html(self.grid.defaultColumn.html);
+                th.appendTo($(item));
             }
             else {
                 var td = $("<td>");
+                if (self && self.grid)
+                    td.html(self.grid.defaultCell.html);
                 $(item).append(td);
             }
         });
